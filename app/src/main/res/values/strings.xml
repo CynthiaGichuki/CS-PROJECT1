@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ModernLogin</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login">Login</string>
+    <string name="new_user_register_now">New User?Register Now</string>
+    <string name="open_images">Open images</string>
+</resources>
