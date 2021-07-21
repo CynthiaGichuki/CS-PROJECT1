@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ private EditText email,password;
 private TextView forgetpassword;
 private FirebaseAuth firebaseAuth;
 private Button loginbtn;
+private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,7 @@ private Button loginbtn;
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         setContentView(R.layout.activity_login);
-
+progressBar=findViewById(R.id.progressbar);
         final Button loginbtn=this.findViewById(R.id.login);
         email=findViewById(R.id.editTextEmail);
         password=findViewById(R.id.editTextPassword);
@@ -60,6 +62,7 @@ private Button loginbtn;
     }
 
     private void login(String tex_email, String tex_password) {
+        progressBar.setVisibility(View.VISIBLE);
         firebaseAuth.signInWithEmailAndPassword(tex_email,tex_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -92,6 +92,15 @@
                             android:inputType="textPassword"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
+                    <ProgressBar
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/progressbar"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/colorAccent"
+                        android:visibility="gone">
+
+                    </ProgressBar>
                     <Button
                         android:id="@+id/cirRegisterButton"
                         style="@style/loginButton"
@@ -127,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Use other Methods"
+                    android:text="Welcome"
                     android:textAlignment="center"
                     android:textColor="@color/whiteTextColor"
                     android:textSize="12sp" />
@@ -143,15 +152,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="30dp"
                 android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_facebook" />
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_google_plus" />
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

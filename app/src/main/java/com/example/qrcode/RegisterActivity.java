@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -33,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button registerbtn;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         changeStatusBarColor();
         firebaseAuth=FirebaseAuth.getInstance();
-
+progressBar=findViewById(R.id.progressbar);
         fullname=findViewById(R.id.editTextName);
         email=findViewById(R.id.editTextEmail);
         mobile=findViewById(R.id.editTextMobile);
@@ -74,6 +76,7 @@ registerbtn.setOnClickListener(new View.OnClickListener() {
     }
 
     private void register(String fname, String emailaddress, String phnnumber, String pass_word) {
+        progressBar.setVisibility(View.VISIBLE);
      firebaseAuth.createUserWithEmailAndPassword(emailaddress,pass_word).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
          @Override
          public void onComplete(@NonNull  Task<AuthResult> task) {

@@ -77,6 +77,15 @@
                 android:text="Forgot Password?"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/newsMoreTextSize" />
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/progressbar"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/colorAccent"
+                android:visibility="gone">
+
+            </ProgressBar>
 
             <Button
                 android:layout_width="match_parent"

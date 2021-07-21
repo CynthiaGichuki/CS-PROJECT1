@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">ModernLogin</string>
+    <string name="app_name">Qr-contacts</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login">Login</string>
     <string name="new_user_register_now">New User?Register Now</string>
     <string name="open_images">Open images</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="new_password">New password</string>
+    <string name="old_password">Old password</string>
 </resources>
