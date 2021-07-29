@@ -1,4 +1,4 @@
-package com.example.qrcode;
+ package com.example.qrcode;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -31,19 +31,19 @@ public class ImagesRecyclerAdapter extends RecyclerView.Adapter<ImagesRecyclerAd
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull  ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.image_layout,parent,false);
-        return null;
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull  ImagesRecyclerAdapter.MyViewHolder holder, int position) {
-        Glide.with(context).load(imagesLists.get(position).getImgUrl()).into(holder.imageView);
+        Glide.with(context).load(imagesLists.get(position).getImageUrl()).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
                 DatabaseReference userReference= FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
                 HashMap<String,Object> hashMap=new HashMap<>();
-                hashMap.put("imageUrl",imagesLists.get(position).getImgUrl());
+                hashMap.put("imageUrl",imagesLists.get(position).getImageUrl());
                 userReference.updateChildren(hashMap );
             }
         });

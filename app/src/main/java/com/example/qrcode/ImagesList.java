@@ -1,22 +1,22 @@
 package com.example.qrcode;
 
 public class ImagesList {
-    private String imgUrl;
+    private String imageUrl;
 
     public ImagesList(String imgUrl) {
-        this.imgUrl = imgUrl;
+        this.imageUrl = imageUrl;
 
     }
 
     public ImagesList() {
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
 

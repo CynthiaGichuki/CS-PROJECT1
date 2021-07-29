@@ -95,31 +95,28 @@ public class Start2Activity extends AppCompatActivity {
     }
 
 });
-circleImageView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        AlertDialog.Builder builder= new AlertDialog.Builder(Start2Activity.this);
-        builder.setCancelable(true);
+circleImageView.setOnClickListener((v) -> {
+    AlertDialog.Builder builder= new AlertDialog.Builder(Start2Activity.this);
+    builder.setCancelable(true);
 
-        View mView= LayoutInflater.from(Start2Activity.this).inflate(R.layout.select_image_layout,null);
-        RecyclerView recyclerView=mView.findViewById(R.id.recyclerview);
-        collectOldImages();
-        recyclerView.setLayoutManager(new GridLayoutManager(Start2Activity.this,3));
-        recyclerView.setHasFixedSize(true);
-        imagesRecyclerAdapter = new ImagesRecyclerAdapter(imagesList,Start2Activity.this);
-        recyclerView.setAdapter(imagesRecyclerAdapter);
-        imagesRecyclerAdapter.notifyDataSetChanged();
-        Button openImage= mView.findViewById(R.id.openimages);
-        openImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openImage();
-            }
-        });
-        builder.setView(mView);
-        AlertDialog alertDialog=builder.create();
-        alertDialog.show();
-    }
+    View mView= LayoutInflater.from(Start2Activity.this).inflate(R.layout.select_image_layout,null);
+    RecyclerView recyclerView=mView.findViewById(R.id.recyclerview);
+    collectOldImages();
+    recyclerView.setLayoutManager(new GridLayoutManager(Start2Activity.this,3));
+    recyclerView.setHasFixedSize(true);
+    imagesRecyclerAdapter = new ImagesRecyclerAdapter(imagesList,Start2Activity.this);
+    recyclerView.setAdapter(imagesRecyclerAdapter);
+    imagesRecyclerAdapter.notifyDataSetChanged();
+    Button openImage= mView.findViewById(R.id.openimages);
+    openImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            openImage();
+        }
+    });
+    builder.setView(mView);
+    AlertDialog alertDialog=builder.create();
+    alertDialog.show();
 });
 
     }
@@ -173,10 +170,11 @@ circleImageView.setOnClickListener(new View.OnClickListener() {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull  Task<Uri> task) {
-                    if (!task.isSuccessful()){
+                    if (task.isSuccessful()){
                       Uri downloadUri= task.getResult();
                       String sdownloadUri=downloadUri.toString();
                         Map<String,Object> hashmap =new HashMap<>();
+                        hashmap.put("imageUrl",sdownloadUri);
                         databaseReference.updateChildren(hashmap);
                         final DatabaseReference profileImagesReference=FirebaseDatabase.getInstance().getReference("profile_images").child(firebaseUser.getUid());
                     profileImagesReference.push().setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -194,7 +192,7 @@ circleImageView.setOnClickListener(new View.OnClickListener() {
 
                      }
                     else{
-                        Toast.makeText(Start2Activity.this,"failed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Start2Activity.this,"failedhere",Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
 
@@ -221,7 +219,10 @@ circleImageView.setOnClickListener(new View.OnClickListener() {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
        int id= item.getItemId();
-       if(id==R.id.changepass){
+       if(id==R.id.editdetails){
+           startActivity(new Intent(Start2Activity.this,EditProfile.class));
+       }
+       else if(id==R.id.changepass){
            startActivity(new Intent(Start2Activity.this,ChangePasswordActivity.class));
        }else if(id==R.id.logout){
            firebaseAuth.signOut();
