@@ -174,7 +174,7 @@ circleImageView.setOnClickListener((v) -> {
                       Uri downloadUri= task.getResult();
                       String sdownloadUri=downloadUri.toString();
                         Map<String,Object> hashmap =new HashMap<>();
-                        hashmap.put("imageUrl",sdownloadUri);
+                        hashmap.put("imgUrl",sdownloadUri);
                         databaseReference.updateChildren(hashmap);
                         final DatabaseReference profileImagesReference=FirebaseDatabase.getInstance().getReference("profile_images").child(firebaseUser.getUid());
                     profileImagesReference.push().setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
