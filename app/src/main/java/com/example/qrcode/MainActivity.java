@@ -16,10 +16,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -43,6 +49,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button submitBTN;
 
 
+    //Declare an Instance of reference where we have user details
+    private DatabaseReference mDatabaseUsers;
+
+    private FirebaseUser mCurrentUser;
+
+    private FirebaseAuth mAuth;
+
+
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference().child("Screening Details");
@@ -54,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
 
 //        Spinner spinner
 //                =findViewById(R.id.course);
@@ -81,6 +100,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         submitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                java.util.Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat currentData = new SimpleDateFormat("dd-MM-yyyy");
+                final String saveCurrentDate = currentData.format(calendar.getTime());
+
+                java.util.Calendar calendar1 = Calendar.getInstance();
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
+
+                final String saveCurrentTime = currentTime.format(calendar1.getTime());
 
                 if(TextUtils.isEmpty(dryCough.getText().toString())){
                     Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
@@ -130,8 +158,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 else {
                     Toast.makeText(MainActivity.this, contact.getText().toString(),Toast.LENGTH_SHORT).show();
                 }
-
-
 
 
 
