@@ -230,6 +230,9 @@ circleImageView.setOnClickListener((v) -> {
            finish();
 
        }
+       else if(id==R.id.qrdetails){
+           startActivity(new Intent(Start2Activity.this, MainActivity.class));
+       }
        return true;
     }
 

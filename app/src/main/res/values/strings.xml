@@ -9,4 +9,52 @@
     <string name="new_password">New password</string>
     <string name="old_password">Old password</string>
     <string name="save">Save</string>
+
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="email_address">EMAIL ADDRESS</string>
+    <string name="have_you_had_a_dry_cough_recently">Have you had a Dry Cough recently?</string>
+    <string name="first_name">FIRST NAME</string>
+    <string name="second_name">SECOND NAME</string>
+
+    <string name="have_you_had_a_fever_recently">Have you had a Fever recently?</string>
+
+
+    <string name="have_you_had_fatigue_tiredness_recently">Have you had Fatigue/Tiredness recently?</string>
+
+    <string name="have_you_had_a_headache_recently">Have you had a Headache recently?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="have_you_had_a_sore_throat_recently">Have you had a Sore Throat recently?</string>
+
+    <string name="have_you_had_lose_of_taste_smell_recently">Have you had lose of taste/smell recently?</string>
+
+    <string name="have_you_had_body_aches_pains_recently">Have you had body aches/pains recently?</string>
+
+    <string name="have_you_been_in_contact_with_someone_who_has_covid_19">Have you been in contact with someone who has COVID-19?</string>
+
+    <string name="submit">SUBMIT</string>
+    <string name="cordial_care">CORDIAL CARE</string>
+    <string name="full_name">FULL NAME</string>
+    <string name="answer_the_following_questions_with_yes_or_no">ANSWER THE FOLLOWING QUESTIONS WITH YES OR NO</string>
+    <string name="course">COURSE</string>
+    <string name="select_your_course_below">SELECT YOUR COURSE BELOW:</string>
+    <string name="screening_details">SCREENING DETAILS</string>
+
+    <string-array name="courses">
+        <item>ICS</item>
+        <item>BBIT</item>
+        <item>BTC</item>
+        <item>Electrical and Electronics Engineering</item>
+        <item>DBIT</item>
+        <item>LAW</item>
+        <item>BCOM</item>
+        <item>Financial Economics</item>
+        <item>Financial Engineering</item>
+        <item>Actuarial Science</item>
+        <item>International Studies</item>
+        <item>Communication</item>
+        <item>Hospitality and Hotel Management</item>
+    </string-array>
+
+
 </resources>
