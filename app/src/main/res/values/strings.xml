@@ -39,6 +39,7 @@
     <string name="course">COURSE</string>
     <string name="select_your_course_below">SELECT YOUR COURSE BELOW:</string>
     <string name="screening_details">SCREENING DETAILS</string>
+    <string name="qr_code_found">QR Code Found</string>
 
     <string-array name="courses">
         <item>ICS</item>
