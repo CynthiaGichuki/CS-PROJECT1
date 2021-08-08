@@ -1,6 +1,7 @@
 package com.example.qrcode;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -28,14 +29,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //    private EditText course;
 //    private EditText emailAddress;
 //    private EditText phoneNumber;
-    private TextView dryCough;
-    private TextView fever;
-    private TextView fatigue;
-    private TextView headache;
-    private TextView soreThroat;
-    private TextView taste;
-    private TextView aches;
-    private TextView contact;
+    private EditText dryCough;
+    private EditText fever;
+    private EditText fatigue;
+    private EditText headache;
+    private EditText soreThroat;
+    private EditText taste;
+    private EditText aches;
+    private EditText contact;
 
 
 
@@ -81,10 +82,59 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
+                if(TextUtils.isEmpty(dryCough.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, dryCough.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(fever.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, fever.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(fatigue.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, fatigue.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(headache.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, headache.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(soreThroat.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, soreThroat.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(taste.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, taste.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(aches.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, aches.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
+                if(TextUtils.isEmpty(contact.getText().toString())){
+                    Toast.makeText(MainActivity.this, "Kindly Enter Data Here", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, contact.getText().toString(),Toast.LENGTH_SHORT).show();
+                }
 
-//                String course1 = course.getText().toString();
-//                String email = emailAddress.getText().toString();
-//                String phone = phoneNumber.getText().toString();
+
+
+
+
                 String dryCough1= dryCough.getText().toString();
                 String fever1 = fever.getText().toString();
                 String fatigue1 = fatigue.getText().toString();
@@ -99,9 +149,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 HashMap<String, String> userMap = new HashMap<>();
 
-//                userMap.put("Course", course1);
-//                userMap.put("Email", email);
-//                userMap.put("Phone Number", phone);
+
                 userMap.put("Dry Cough", dryCough1);
                 userMap.put("Fever", fever1);
                 userMap.put("Fatigue", fatigue1);
