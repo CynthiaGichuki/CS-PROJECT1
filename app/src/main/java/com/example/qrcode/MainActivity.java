@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference = firebaseDatabase.getReference("Screening Details");
+    private DatabaseReference databaseReference = firebaseDatabase.getReference().child("Screening Details");
 
 
 
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 //generate a unique key for each data using push method
                 databaseReference.push().setValue(userMap);
-
+                Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_SHORT).show();
 
 
             }
