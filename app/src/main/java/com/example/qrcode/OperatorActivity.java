@@ -35,6 +35,7 @@ public class OperatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_operator);
+
         previewView = findViewById(R.id.activity_main_previewView);
         qrCodeFoundButton = findViewById(R.id.activity_main_qrCodeFoundButton);
         qrCodeFoundButton.setVisibility(View.INVISIBLE);
