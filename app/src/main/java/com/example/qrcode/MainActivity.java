@@ -47,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private Button submitBTN;
     private FirebaseUser mCurrentUser;
     private FirebaseAuth mAuth;
-   // private FirebaseDatabase firebaseDatabase;
+   private FirebaseDatabase firebaseDatabase;
+   Screening screening;
     private DatabaseReference databaseref ;
-    private StorageReference mStorageRef;
+    //get the id of the current user
     private DatabaseReference mDatabaseUsers;
+
 
 
 
@@ -81,16 +83,25 @@ public class MainActivity extends AppCompatActivity {
         aches = findViewById(R.id.aches);
         contact = findViewById(R.id.contact);
         submitBTN = findViewById(R.id.submitBTN);
-        mStorageRef=FirebaseStorage.getInstance().getReference();
-        databaseref=FirebaseDatabase.getInstance().getReference().child("Screening");
+        firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-        mDatabaseUsers=FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+        databaseref=FirebaseDatabase.getInstance().getReference().child("screening").child(mCurrentUser.getUid());
+       // mDatabaseUsers=FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+        screening=new Screening();
 
         submitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 Toast.makeText(MainActivity.this,"posting ....",Toast.LENGTH_LONG).show();
+                 String drycough= dryCough.getText().toString();
+                final String Fever= fever.getText().toString().trim();
+                final String Fatigue= fatigue.getText().toString().trim();
+                final String Headache= headache.getText().toString().trim();
+                final String Sorethroat= soreThroat.getText().toString().trim();
+                final String Taste= taste.getText().toString().trim();
+                final String Aches= aches.getText().toString().trim();
+                final String Contact= contact.getText().toString().trim();
                 java.util.Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat currentData = new SimpleDateFormat("dd-MM-yyyy");
                 final String saveCurrentDate = currentData.format(calendar.getTime());
@@ -100,49 +111,13 @@ Toast.makeText(MainActivity.this,"posting ....",Toast.LENGTH_LONG).show();
 
                 final String saveCurrentTime = currentTime.format(calendar1.getTime());
 
-                final String drycough= dryCough.getText().toString().trim();
-                final String Fever= fever.getText().toString().trim();
-                final String Fatigue= fatigue.getText().toString().trim();
-                final String Headache= headache.getText().toString().trim();
-                final String Sorethroat= soreThroat.getText().toString().trim();
-                final String Taste= taste.getText().toString().trim();
-                final String Aches= aches.getText().toString().trim();
-                final String Contact= contact.getText().toString().trim();
+
                 if(TextUtils.isEmpty(drycough)||TextUtils.isEmpty(Fever)||TextUtils.isEmpty(Fatigue)||TextUtils.isEmpty(Headache)||TextUtils.isEmpty(Sorethroat)||TextUtils.isEmpty(Taste)||TextUtils.isEmpty(Aches)||TextUtils.isEmpty(Contact)){
 
                     Toast.makeText(MainActivity.this,"ALL FIELDS ARE REQUIRED",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    final DatabaseReference newpost=databaseref.push();
-                    mDatabaseUsers.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            newpost.child("drycough").setValue(drycough);
-                            newpost.child("fever").setValue(Fever);
-                            newpost.child("fatigue").setValue(Fatigue);
-                            newpost.child("headache").setValue(Headache);
-                            newpost.child("soreThroat").setValue(Sorethroat);
-                            newpost.child("taste").setValue(Taste);
-                            newpost.child("aches").setValue(Aches);
-                            newpost.child("contact").setValue(Contact);
-                            newpost.child("uid").setValue(mCurrentUser.getUid());
-                            newpost.child("time").setValue(saveCurrentTime);
-                            newpost.child("date").setValue(saveCurrentDate);
-                            newpost.child("email").setValue(snapshot.child("email").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Intent intent=new Intent(MainActivity.this,Start2Activity.class);
-                                    startActivity(intent);
-
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull  DatabaseError error) {
-                            notifyUser("Database error: " + error.toException());
-                        }
-                    });
+                    addtoDb(drycough,Fever,Fatigue,Headache,Sorethroat,Taste,Aches,Contact,saveCurrentDate,saveCurrentDate);
                 }
 
 
@@ -150,6 +125,39 @@ Toast.makeText(MainActivity.this,"posting ....",Toast.LENGTH_LONG).show();
 
             }
         });
+    }
+
+    private void addtoDb(String drycough, String fever, String fatigue, String headache, String sorethroat, String taste, String aches, String contact, String saveCurrentDate, String saveCurrentTime) {
+        screening.setDrycough(drycough);
+        screening.setFever(fever);
+        screening.setFatigue(fatigue);
+        screening.setHeadache(headache);
+        screening.setSorethroat(sorethroat);
+        screening.setTaste(taste);
+        screening.setAches(aches);
+        screening.setContact(contact);
+        screening.setDate(saveCurrentDate);
+        screening.setTime(saveCurrentTime);
+
+databaseref.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        databaseref.setValue(screening);
+
+        Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(MainActivity.this,Start2Activity.class);
+        startActivity(intent);
+
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+        Toast.makeText(MainActivity.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+
+
+    }
+});
+
     }
 
     private void notifyUser(String s) {
