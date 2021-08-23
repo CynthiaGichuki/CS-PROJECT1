@@ -22,7 +22,11 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.QRCode">
-        <activity android:name=".QRCodeGenerate"></activity>
+        <activity android:name=".QRCodeGenerate"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />

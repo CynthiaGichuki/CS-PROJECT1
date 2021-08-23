@@ -1,6 +1,7 @@
 package com.example.qrcode;
 
 public class Screening {
+    private  String gender;
     private String drycough;
     private String Fever;
     private String Fatigue;
@@ -23,6 +24,14 @@ public class Screening {
 
     public void setDrycough(String drycough) {
         this.drycough = drycough;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getFever() {
