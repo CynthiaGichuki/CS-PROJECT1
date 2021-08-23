@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,27 @@ public class MainActivity extends AppCompatActivity {
     private EditText taste;
     private EditText aches;
     private EditText contact;
+    //gender radio button
+    RadioButton mFeverOptions;
+    RadioGroup mFever;
+    RadioButton mDryCoughOptions;
+    RadioGroup mDryCough;
+    RadioButton mFatigueOptions;
+    RadioGroup mFatigue;
+    RadioButton mHeadacheOptions;
+    RadioGroup mHeadache;
+    RadioButton mSoreThroatOptions;
+    RadioGroup mSoreThroat;
+    RadioButton mTasteOptions;
+    RadioGroup mTaste;
+    RadioButton mAchesOptions;
+    RadioGroup mAches;
+    RadioButton mContactOptions;
+    RadioGroup mContact;
+
+
+
+
     private Button submitBTN;
     private FirebaseUser mCurrentUser;
     private FirebaseAuth mAuth;
@@ -53,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     //get the id of the current user
     private DatabaseReference mDatabaseUsers;
 
-
+String strdrycough,strfever,strfatigue,strheadache,strsorethroat,strtaste,straches,strcontact;
 
 
 
@@ -61,34 +84,152 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+     mDryCough=findViewById(R.id.rg_drycough);
+     mFever=findViewById(R.id.rg_fever);
+     mFatigue=findViewById(R.id.rg_fatigue);
+     mHeadache=findViewById(R.id.rg_headache);
+     mSoreThroat=findViewById(R.id.rg_sorethroat);
+     mTaste=findViewById(R.id.rg_taste);
+     mAches=findViewById(R.id.rg_aches);
+     mContact=findViewById(R.id.rg_contact);
 
-       // mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
-
-//        Spinner spinner
-//                =findViewById(R.id.course);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.courses, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//        spinner.setOnItemSelectedListener(this);
-
-
-
-
-        dryCough = findViewById(R.id.dryCough);
-        fever = findViewById(R.id.fever);
-        fatigue = findViewById(R.id.fatigue);
-        headache = findViewById(R.id.headache);
-        soreThroat = findViewById(R.id.soreThroat);
-        taste = findViewById(R.id.taste);
-        aches = findViewById(R.id.aches);
-        contact = findViewById(R.id.contact);
         submitBTN = findViewById(R.id.submitBTN);
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-        databaseref=FirebaseDatabase.getInstance().getReference().child("screening").child(mCurrentUser.getEmail());
-       // mDatabaseUsers=FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+        databaseref=FirebaseDatabase.getInstance().getReference().child("screening").child(mCurrentUser.getUid());
         screening=new Screening();
+
+     mDryCough.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        mDryCoughOptions=mDryCough.findViewById(checkedId);
+        switch (checkedId){
+            case R.id.rb_drycough_yes:
+                strdrycough=mDryCoughOptions.getText().toString();
+                break;
+            case R.id.rb_drycough_no:
+                strdrycough=mDryCoughOptions.getText().toString();
+                break;
+            default:
+        }
+
+    }
+});
+
+        mFever.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mFeverOptions=mFever.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_fever_yes:
+                        strfever=mFeverOptions.getText().toString();
+                        break;
+                    case R.id.rb_fever_no:
+                        strfever=mFeverOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+        mFatigue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mFatigueOptions=mFatigue.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_fatigue_yes:
+                        strfatigue=mFeverOptions.getText().toString();
+                        break;
+                    case R.id.rb_fatigue_no:
+                        strfatigue=mFeverOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+        mHeadache.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mHeadacheOptions=mHeadache.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_headache_yes:
+                        strheadache=mHeadacheOptions.getText().toString();
+                        break;
+                    case R.id.rb_headache_no:
+                        strheadache=mHeadacheOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+        mSoreThroat.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mSoreThroatOptions=mSoreThroat.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_sorethroat_yes:
+                        strsorethroat=mSoreThroatOptions.getText().toString();
+                        break;
+                    case R.id.rb_sorethroat_no:
+                        strsorethroat=mSoreThroatOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+        mAches.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mAchesOptions=mAches.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_aches_yes:
+                        straches=mAchesOptions.getText().toString();
+                        break;
+                    case R.id.rb_aches_no:
+                        straches=mAchesOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+        mTaste.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mTasteOptions=mTaste.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_taste_yes:
+                        strtaste=mTasteOptions.getText().toString();
+                        break;
+                    case R.id.rb_taste_no:
+                        strtaste=mTasteOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+        mContact.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mContactOptions=mContact.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_contact_yes:
+                        strcontact=mContactOptions.getText().toString();
+                        break;
+                    case R.id.rb_contact_no:
+                        strcontact=mContactOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+
 
         submitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,17 +237,17 @@ public class MainActivity extends AppCompatActivity {
 
 Toast.makeText(MainActivity.this,"posting ....",Toast.LENGTH_LONG).show();
 
-                 String drycough= dryCough.getText().toString();
-                final String Fever= fever.getText().toString().trim();
-                final String Fatigue= fatigue.getText().toString().trim();
-                final String Headache= headache.getText().toString().trim();
-                final String Sorethroat= soreThroat.getText().toString().trim();
-                final String Taste= taste.getText().toString().trim();
-                final String Aches= aches.getText().toString().trim();
-                final String Contact= contact.getText().toString().trim();
+                 String drycough= mDryCoughOptions.getText().toString();
+                final String Fever= mFeverOptions.getText().toString().trim();
+                final String Fatigue= mFatigueOptions.getText().toString().trim();
+                final String Headache= mHeadacheOptions.getText().toString().trim();
+                final String Sorethroat= mSoreThroatOptions.getText().toString().trim();
+                final String Taste= mTasteOptions.getText().toString().trim();
+                final String Aches= mAchesOptions.getText().toString().trim();
+                final String Contact= mContactOptions.getText().toString().trim();
                 java.util.Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat currentData = new SimpleDateFormat("dd-MM-yyyy");
-                final String saveCurrentDate = currentData.format(calendar.getTime());
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+                final String saveCurrentDate = sdf.format(calendar.getTime());
 
                 java.util.Calendar calendar1 = Calendar.getInstance();
                 SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
