@@ -86,14 +86,16 @@ public class MainActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-        databaseref=FirebaseDatabase.getInstance().getReference().child("screening").child(mCurrentUser.getUid());
+        databaseref=FirebaseDatabase.getInstance().getReference().child("screening").child(mCurrentUser.getEmail());
        // mDatabaseUsers=FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
         screening=new Screening();
 
         submitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 Toast.makeText(MainActivity.this,"posting ....",Toast.LENGTH_LONG).show();
+
                  String drycough= dryCough.getText().toString();
                 final String Fever= fever.getText().toString().trim();
                 final String Fatigue= fatigue.getText().toString().trim();

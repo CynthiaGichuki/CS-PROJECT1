@@ -51,6 +51,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Start2Activity extends AppCompatActivity {
     private TextView username;
+    private Button GenerateQrCode;
     private CircleImageView circleImageView;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
@@ -71,6 +72,7 @@ public class Start2Activity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
         imagesList =new ArrayList<>();
         username=findViewById(R.id.fullname);
+        GenerateQrCode=findViewById(R.id.idBtnGenerateQR);
         circleImageView=findViewById(R.id.profileimage);
         firebaseAuth=firebaseAuth.getInstance();
         firebaseUser=firebaseAuth.getCurrentUser();
@@ -118,7 +120,14 @@ circleImageView.setOnClickListener((v) -> {
     AlertDialog alertDialog=builder.create();
     alertDialog.show();
 });
+GenerateQrCode.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(Start2Activity.this,QRCodeGenerate.class);
+        startActivity(intent);
 
+    }
+});
     }
 
     private void openImage() {
@@ -256,4 +265,6 @@ Toast.makeText(Start2Activity.this,error.getMessage(),Toast.LENGTH_SHORT).show()
             }
         });
     }
+
+
 }

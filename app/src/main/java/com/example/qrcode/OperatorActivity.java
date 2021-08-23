@@ -65,9 +65,9 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
                     //converting the data to json
                     JSONObject obj = new JSONObject(result.getContents());
                     //setting values to textviews
-                    name.setText(obj.getString("name"));
-                    email.setText(obj.getString("email"));
-                    mobile.setText(obj.getString("mobile"));
+                    name.setText(obj.getString("Name"));
+                    email.setText(obj.getString("Email"));
+                    mobile.setText(obj.getString("Mobile"));
                     temp.setText(obj.getString("temp"));
 
                 } catch (JSONException e) {
@@ -81,6 +81,7 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
+
         }
     }
 
