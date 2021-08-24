@@ -20,10 +20,13 @@ import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -33,9 +36,12 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
 
 public class OperatorActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView name,email,mobile,temp;
-    private Button scanbtn;
+    private TextView name,email,mobile;
+    private Button scanbtn,confirmbtn;
     private IntentIntegrator qrScan;
+    //firebase
+    private DatabaseReference mDatabase;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +51,9 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
         name=findViewById(R.id.TextViewTextName);
         email=findViewById(R.id.TextViewEmail);
         mobile=findViewById(R.id.TextViewMobile);
-        temp=findViewById(R.id.TextViewTemp);
         scanbtn=findViewById(R.id.cirScan);
+        confirmbtn=findViewById(R.id.cirConfirm);
+        mDatabase = FirebaseDatabase.getInstance().getReference("path");
 
         qrScan = new IntentIntegrator(this);
 
@@ -61,6 +68,11 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
             } else {
                 //if qr contains data
+scanbtn.setVisibility(View.INVISIBLE);
+confirmbtn.setVisibility(View.VISIBLE);
+
+
+
                 try {
                     //converting the data to json
                     JSONObject obj = new JSONObject(result.getContents());
@@ -68,7 +80,7 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
                     name.setText(obj.getString("Name"));
                     email.setText(obj.getString("Email"));
                     mobile.setText(obj.getString("Mobile"));
-                    temp.setText(obj.getString("temp"));
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
