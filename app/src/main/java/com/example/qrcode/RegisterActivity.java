@@ -10,9 +10,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -28,7 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
   private EditText fullname,email,mobile,password;
   private Button registerbtn;
@@ -48,6 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
     mobile=findViewById(R.id.editTextMobile);
     password=findViewById(R.id.editTextPassword);
     registerbtn=findViewById(R.id.cirRegisterButton);
+
+    Spinner spinner = findViewById(R.id.course);
+
+
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+            R.array.courses, android.R.layout.simple_spinner_item);
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spinner.setAdapter(adapter);
+    spinner.setOnItemSelectedListener(this);
     registerbtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -63,6 +75,14 @@ public class RegisterActivity extends AppCompatActivity {
         }
       }
     });
+
+  }
+  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    String text = parent.getItemAtPosition(position).toString();
+    Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
+  }
+  @Override
+  public void onNothingSelected(AdapterView<?> parent) {
 
   }
 
