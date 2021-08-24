@@ -123,8 +123,8 @@ circleImageView.setOnClickListener((v) -> {
 GenerateQrCode.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(Start2Activity.this,QRCodeGenerate.class);
-        startActivity(intent);
+        //Intent intent=new Intent(Start2Activity.this,QRCodeGenerate.class);
+        //startActivity(intent);
 
     }
 });
