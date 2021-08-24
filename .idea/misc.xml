@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_edit_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_main.xml" value="0.1453804347826087" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_edit_profile.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_forget_password.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_main.xml" value="0.1" />
