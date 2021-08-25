@@ -21,6 +21,7 @@ import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
     private TextView name,email,mobile;
     private Button scanbtn,confirmbtn;
     private IntentIntegrator qrScan;
+    private ProgressBar progressBar;
     //firebase
 
     private FirebaseAuth mAuth;
@@ -61,6 +63,7 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
         email=findViewById(R.id.TextViewEmail);
         mobile=findViewById(R.id.TextViewMobile);
         scanbtn=findViewById(R.id.cirScan);
+
         confirmbtn=findViewById(R.id.cirConfirm);
 
 
