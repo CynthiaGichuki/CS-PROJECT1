@@ -97,7 +97,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:text="Confirm details"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
 
 
         </LinearLayout>

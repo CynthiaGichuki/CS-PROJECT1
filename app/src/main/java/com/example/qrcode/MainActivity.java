@@ -38,14 +38,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText dryCough;
-    private EditText fever;
-    private EditText fatigue;
-    private EditText headache;
-    private EditText soreThroat;
-    private EditText taste;
-    private EditText aches;
-    private EditText contact;
     //gender radio button
     RadioButton mFeverOptions;
     RadioGroup mFever;

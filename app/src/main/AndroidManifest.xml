@@ -24,6 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QRCode">
         <activity
+            android:name=".ConfirmActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".QRCodeGenerate"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
