@@ -27,9 +27,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class ConfirmActivity extends AppCompatActivity {
-    private EditText name,mobile,email;
+    private EditText name,mobile,email,temp;
     Button confirm;
     ProgressBar progressBar;
+
     //FirebaseDatabase databaseReference;
    // private FirebaseAuth mAuth;
    // private DatabaseReference databaseReference;
@@ -42,6 +43,7 @@ public class ConfirmActivity extends AppCompatActivity {
     // creating a variable for
     // our object class
     Operatordetails operatordetails;
+    String temperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class ConfirmActivity extends AppCompatActivity {
         mobile=findViewById(R.id.editTextMobile);
         email=findViewById(R.id.editTextEmail);
         confirm=findViewById(R.id.cirConfirmd);
+        temp=findViewById(R.id.editTextTemp);
         progressBar=findViewById(R.id.progressbar);
 
 
@@ -59,6 +62,7 @@ public class ConfirmActivity extends AppCompatActivity {
         String Name = intent.getStringExtra("name");
         String Email = intent.getStringExtra("email");
         String Mobile=intent.getStringExtra("mobile");
+
 
         name.setText(Name);
         mobile.setText(Mobile);
@@ -90,6 +94,7 @@ public class ConfirmActivity extends AppCompatActivity {
         String FName=name.getText().toString();
         String EmailA=email.getText().toString();
         String Mobileno=mobile.getText().toString();
+        String tempa=temp.getText().toString().trim();
         java.util.Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         final String saveCurrentDate = sdf.format(calendar.getTime());
@@ -97,6 +102,7 @@ public class ConfirmActivity extends AppCompatActivity {
         java.util.Calendar calendar1 = Calendar.getInstance();
         SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         final String saveCurrentTime = currentTime.format(calendar1.getTime());
+
 
 
         if(TextUtils.isEmpty(name.getText().toString())){
@@ -115,14 +121,15 @@ public class ConfirmActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            adddatatodb(FName,EmailA,Mobileno,saveCurrentDate,saveCurrentTime);
+            adddatatodb(FName,EmailA,Mobileno,tempa,saveCurrentDate,saveCurrentTime);
         }
     }
 
-    private void adddatatodb(String fName, String emailA, String mobileno, String saveCurrentDate, String saveCurrentTime) {
+    private void adddatatodb(String fName, String emailA, String mobileno,String tempa, String saveCurrentDate, String saveCurrentTime) {
         operatordetails.setName(fName);
         operatordetails.setEmail(emailA);
         operatordetails.setMobile(mobileno);
+        operatordetails.setTemp(tempa);
         operatordetails.setDate(saveCurrentDate);
         operatordetails.setTime(saveCurrentTime);
 

@@ -4,6 +4,8 @@ public class Operatordetails {
     private String name;
     private String email;
     private String mobile;
+    private String temp;
+
     private String date;
     private String time;
 
@@ -11,6 +13,7 @@ public class Operatordetails {
 
     public Operatordetails() {
     }
+
 
     public String getDate() {
         return date;
@@ -26,6 +29,14 @@ public class Operatordetails {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
 
     public String getName() {

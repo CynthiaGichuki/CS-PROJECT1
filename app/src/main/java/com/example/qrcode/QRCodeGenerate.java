@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,12 +37,17 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.mcsoft.timerangepickerdialog.RangeTimePickerDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RangeTimePickerDialog.ISelectedTime {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
     private  UserData userData;
@@ -48,12 +55,25 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
     TextInputLayout name,mobile,email;
     Button btGenerate;
     ImageView ivOutput;
+    Spinner spinner1, spinner2;
+    List<String> subCategories = new ArrayList<>();
+
+    private TimePicker timePicker1;
+    int hour = timePicker1.getCurrentHour();
+
+    private TextView time;
+    private Calendar calendar;
+    private String format = "";
+
+
+
+
     private  EditText editname,editmobile,editemail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_generate);
-
+        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
         name = findViewById(R.id.name);
         mobile=findViewById(R.id.mobile);
         email=findViewById(R.id.email);
@@ -64,6 +84,69 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
         editname=findViewById(R.id.editTextName);
         editmobile=findViewById(R.id.editTextMobile);
         editemail=findViewById(R.id.editTextEmail);
+        spinner1 = findViewById(R.id.building);
+        spinner2 = findViewById(R.id.room);
+        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
+        time = (TextView) findViewById(R.id.tvtime);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int min = calendar.get(Calendar.MINUTE);
+        showTime(hour, min);
+        calendar = Calendar.getInstance();
+        List<String> categories =  new ArrayList<>();
+        categories.add("MSB");
+        categories.add("STMB");
+        categories.add("Phase-1");
+
+        ArrayAdapter<String> adapter_1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        adapter_1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner1.setAdapter(adapter_1);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+                if(adapterView.getItemAtPosition(position).equals("MSB")){
+                    subCategories.clear();
+                    subCategories.add("1"); subCategories.add("2"); subCategories.add("3");
+                    subCategories.add("4"); subCategories.add("5"); subCategories.add("6");
+                    subCategories.add("7"); subCategories.add("8"); subCategories.add("9");
+                    subCategories.add("10"); subCategories.add("11"); subCategories.add("12");
+                    subCategories.add("13"); subCategories.add("14"); subCategories.add("15");
+                    fillSpinner();
+                }
+                else if (adapterView.getItemAtPosition(position).equals("STMB")){
+                    subCategories.clear();
+                    subCategories.add("F1-01"); subCategories.add("F1-02"); subCategories.add("F1-03");
+                    subCategories.add("F2-01"); subCategories.add("F2-02"); subCategories.add("F2-03");
+                    subCategories.add("F2-04"); subCategories.add("F2-05"); subCategories.add("F3-01");
+                    subCategories.add("F3-02"); subCategories.add("F3-03"); subCategories.add("F3-04");
+                    subCategories.add("F3-05"); subCategories.add("F4-01"); subCategories.add("F4-02");
+                    subCategories.add("F4-03"); subCategories.add("F4-05"); subCategories.add("STMB 5TH FLOOR");
+                    fillSpinner();
+
+
+                }
+                else  if(adapterView.getItemAtPosition(position).equals("Phase-1")){
+                    subCategories.clear();
+                    subCategories.add(" RM-01"); subCategories.add("lONGONOT LAB");
+                    subCategories.add("RM-01"); subCategories.add("MENENGAI");
+                    subCategories.add("RM-04"); subCategories.add("KINDARUMA");
+                    subCategories.add("RM-02"); subCategories.add("JASIRI STAFFROOM");
+                    subCategories.add("RM-05");  subCategories.add("F4-02");
+                    subCategories.add("RM-03");
+                    fillSpinner();
+
+                }
+
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         Spinner spinner = findViewById(R.id.course);
         reference= FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
 
@@ -98,6 +181,9 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
                     userdetails.put("Name",editname.getText());
                     userdetails.put("Email",editemail.getText());
                     userdetails.put("Mobile",editmobile.getText());
+                    userdetails.put("Course",spinner.getSelectedItem());
+                    userdetails.put("Building",spinner1.getSelectedItem());
+                    userdetails.put("Room",spinner2.getSelectedItem());
                     JSONObject userObject = new JSONObject();
                     userObject.put("user", userdetails);
 
@@ -184,13 +270,55 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
     }
+    public void setTime(View view) {
+        int hour = timePicker1.getCurrentHour();
+        int min = timePicker1.getCurrentMinute();
+        showTime(hour, min);
+    }
+    private void showTime(int hour, int min) {
+        if (hour == 0) {
+            hour += 12;
+            format = "AM";
+        } else if (hour == 12) {
+            format = "PM";
+        } else if (hour > 12) {
+            hour -= 12;
+            format = "PM";
+        } else {
+            format = "AM";
+        }
+
+        time.setText(new StringBuilder().append(hour).append(" : ").append(min)
+                .append(" ").append(format));
+    }
+
+    private void fillSpinner() {
+
+
+            ArrayAdapter<String> adapter_2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, subCategories);
+            adapter_2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner2.setAdapter(adapter_2);
+
+    }
+
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
+
         Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void onSelectedTime(int hourStart, int minuteStart, int hourEnd, int minuteEnd) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }
