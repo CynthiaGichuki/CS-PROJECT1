@@ -129,6 +129,7 @@ public class ConfirmActivity extends AppCompatActivity {
 
 
 
+
         if(TextUtils.isEmpty(name.getText().toString())){
             Intent intent=new Intent(ConfirmActivity.this,OperatorActivity.class);
             Toast.makeText(this,"scan again for name",Toast.LENGTH_SHORT).show();
