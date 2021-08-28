@@ -8,17 +8,21 @@ public class UserData {
     private String phonenumber;
     private String imgUrl;
 
-    public UserData(String userId, String fullname, String course, String email, String phonenumber, String imgUrl) {
+
+    public UserData(String userId, String fullname, String email, String course, String phonenumber, String imgUrl ) {
         this.userId = userId;
         this.fullname = fullname;
-        this.course=course;
         this.email = email;
+        this.course = course;
         this.phonenumber = phonenumber;
         this.imgUrl = imgUrl;
+
     }
 
     public UserData() {
     }
+
+
 
     public String getCourse() {
         return course;

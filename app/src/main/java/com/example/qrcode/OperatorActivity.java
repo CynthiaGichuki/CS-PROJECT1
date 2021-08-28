@@ -102,11 +102,24 @@ confirmbtn.setVisibility(View.VISIBLE);
                     String fname=obj.get("Name").toString();
                     String Email=obj.get("Email").toString();
                     String Mobile=obj.get("Mobile").toString();
+String Course=obj.get("Course").toString();
+String Status=obj.get("Building").toString();
+String Room=obj.get("Room").toString();
+String Date=obj.get("Date").toString();
+String Time=obj.get("Time").toString();
+                    String Timestamp=obj.get("Timestamp").toString();
+
 
                     Intent intent=new Intent(OperatorActivity.this,ConfirmActivity.class);
                     intent.putExtra("name",fname);
                     intent.putExtra("email",Email);
                     intent.putExtra("mobile",Mobile);
+                    intent.putExtra("course",Course);
+                    intent.putExtra("status",Status);
+                    intent.putExtra("room",Room);
+                    intent.putExtra("date",Date);
+                    intent.putExtra("time",Time);
+                   intent.putExtra("timestamp",Timestamp);
                     startActivity(intent);
 
 

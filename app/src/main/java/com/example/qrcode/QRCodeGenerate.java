@@ -3,6 +3,9 @@ package com.example.qrcode;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.FragmentManager;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -15,9 +18,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -42,38 +48,34 @@ import com.mcsoft.timerangepickerdialog.RangeTimePickerDialog;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 
-public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RangeTimePickerDialog.ISelectedTime {
+public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private FirebaseAuth mAuth;
     private DatabaseReference reference;
     private  UserData userData;
     private ProgressBar progressBar;
+    RadioButton mStatusOptions;
+    RadioGroup mStatus;
     TextInputLayout name,mobile,email;
     Button btGenerate;
     ImageView ivOutput;
     Spinner spinner1, spinner2;
+    Button btnDatePicker, btnTimePicker;
+    EditText txtDate, txtTime;
+    private int mYear, mMonth, mDay, mHour, mMinute;
     List<String> subCategories = new ArrayList<>();
-
-    private TimePicker timePicker1;
-    int hour = timePicker1.getCurrentHour();
-
-    private TextView time;
-    private Calendar calendar;
-    private String format = "";
-
-
-
-
+String status;
     private  EditText editname,editmobile,editemail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode_generate);
-        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
+
         name = findViewById(R.id.name);
         mobile=findViewById(R.id.mobile);
         email=findViewById(R.id.email);
@@ -86,16 +88,32 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
         editemail=findViewById(R.id.editTextEmail);
         spinner1 = findViewById(R.id.building);
         spinner2 = findViewById(R.id.room);
-        timePicker1 = (TimePicker) findViewById(R.id.timePicker1);
-        time = (TextView) findViewById(R.id.tvtime);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int min = calendar.get(Calendar.MINUTE);
-        showTime(hour, min);
-        calendar = Calendar.getInstance();
+        mStatus=findViewById(R.id.rg_status);
+        mStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                mStatusOptions=mStatus.findViewById(checkedId);
+                switch (checkedId){
+                    case R.id.rb_status_yes:
+                        status=mStatusOptions.getText().toString();
+                        break;
+                    case R.id.rb_status_no:
+                        status=mStatusOptions.getText().toString();
+                        break;
+                    default:
+                }
+
+            }
+        });
+
         List<String> categories =  new ArrayList<>();
         categories.add("MSB");
         categories.add("STMB");
         categories.add("Phase-1");
+        btnDatePicker=(Button)findViewById(R.id.btn_date);
+        btnTimePicker=(Button)findViewById(R.id.btn_time);
+        txtDate=(EditText)findViewById(R.id.in_date);
+        txtTime=(EditText)findViewById(R.id.in_time);
 
         ArrayAdapter<String> adapter_1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
         adapter_1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -176,6 +194,13 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
         btGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                java.util.Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                final String saveCurrentDate = sdf.format(calendar.getTime());
+
+                java.util.Calendar calendar1 = Calendar.getInstance();
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+                final String saveCurrentTime = currentTime.format(calendar1.getTime());
                 JSONObject userdetails=new JSONObject();
                 try {
                     userdetails.put("Name",editname.getText());
@@ -184,6 +209,10 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
                     userdetails.put("Course",spinner.getSelectedItem());
                     userdetails.put("Building",spinner1.getSelectedItem());
                     userdetails.put("Room",spinner2.getSelectedItem());
+                    userdetails.put("Date",txtDate.getText());
+                    userdetails.put("Time",txtTime.getText());
+                    userdetails.put("Status",mStatusOptions.getText());
+                    userdetails.put("Timestamp",saveCurrentTime);
                     JSONObject userObject = new JSONObject();
                     userObject.put("user", userdetails);
 
@@ -211,55 +240,7 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
                 }
 
 
-//                WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
-//
-//                // initializing a variable for default display.
-//                Display display = manager.getDefaultDisplay();
-//
-//                // creating a variable for point which
-//                // is to be displayed in QR Code.
-//                Point point = new Point();
-//                display.getSize(point);
-//
-//                // getting width and
-//                // height of a point
-//                int width = point.x;
-//                int height = point.y;
-//
-//                // generating dimension from width and height.
-//                int dimen = width < height ? width : height;
-//                dimen = dimen * 3 / 4;
-//
-//                // setting this dimensions inside our qr code
-//                // encoder to generate our qr code.
-//                qrgEncoder = new QRGEncoder(dataEdt.getText().toString(), null, QRGContents.Type.TEXT, dimen);
-//                try {
-//                    // getting our qrcode in the form of bitmap.
-//                    bitmap = qrgEncoder.encodeAsBitmap();
-//                    // the bitmap is set inside our image
-//                    // view using .setimagebitmap method.
-//                    qrCodeIV.setImageBitmap(bitmap);
-//                } catch (WriterException e) {
-//                    // this method is called for
-//                    // exception handling.
-//                    Log.e("Tag", e.toString());
-//                }
 
-//                MultiFormatWriter writer = new MultiFormatWriter();
-//
-//                try {
-//                    BitMatrix matrix = writer.encode(sText, BarcodeFormat.QR_CODE, 350, 350);
-//                    //BarcodeEncoder encoder = new BarcodeEncoder();
-//
-//                    //Bitmap bitmap = encoder.createBitmap(matrix);
-//
-//                    //ivOutput.setImageBitmap(bitmap);
-//                    InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-//
-//
-//                } catch (WriterException e) {
-//                    e.printStackTrace();
-//                }
 
             }
         });
@@ -269,28 +250,56 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
 
-    }
-    public void setTime(View view) {
-        int hour = timePicker1.getCurrentHour();
-        int min = timePicker1.getCurrentMinute();
-        showTime(hour, min);
-    }
-    private void showTime(int hour, int min) {
-        if (hour == 0) {
-            hour += 12;
-            format = "AM";
-        } else if (hour == 12) {
-            format = "PM";
-        } else if (hour > 12) {
-            hour -= 12;
-            format = "PM";
-        } else {
-            format = "AM";
-        }
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get Current Date
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
 
-        time.setText(new StringBuilder().append(hour).append(" : ").append(min)
-                .append(" ").append(format));
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(QRCodeGenerate.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
+
+            }
+        });
+        btnTimePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(QRCodeGenerate.this,
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+
+                                txtTime.setText(hourOfDay + ":" + minute);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
+            }
+        });
+
     }
+
 
     private void fillSpinner() {
 
@@ -312,14 +321,5 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
 
     }
 
-    @Override
-    public void onSelectedTime(int hourStart, int minuteStart, int hourEnd, int minuteEnd) {
-
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
 }
 

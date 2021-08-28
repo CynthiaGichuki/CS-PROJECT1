@@ -27,7 +27,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class ConfirmActivity extends AppCompatActivity {
-    private EditText name,mobile,email,temp;
+    private EditText name,mobile,email,temp,course,building,status,date,time,room;
     Button confirm;
     ProgressBar progressBar;
 
@@ -49,8 +49,15 @@ public class ConfirmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
+        status=findViewById(R.id.status);
+        room=findViewById(R.id.room);
+        date=findViewById(R.id.date);
+        time=findViewById(R.id.time);
+        building=findViewById(R.id.building);
+        course=findViewById(R.id.course);
         name=findViewById(R.id.editTextName);
         mobile=findViewById(R.id.editTextMobile);
+        status=findViewById(R.id.status);
         email=findViewById(R.id.editTextEmail);
         confirm=findViewById(R.id.cirConfirmd);
         temp=findViewById(R.id.editTextTemp);
@@ -62,11 +69,28 @@ public class ConfirmActivity extends AppCompatActivity {
         String Name = intent.getStringExtra("name");
         String Email = intent.getStringExtra("email");
         String Mobile=intent.getStringExtra("mobile");
+        String Date=intent.getStringExtra("date");
+        String Time=intent.getStringExtra("time");
+        String Building=intent.getStringExtra("building");
+        String Room=intent.getStringExtra("room");
+        String Course=intent.getStringExtra("course");
+        String Status=intent.getStringExtra("status");
+
+
 
 
         name.setText(Name);
         mobile.setText(Mobile);
         email.setText(Email);
+        course.setText(Course);
+        time.setText(Time);
+        building.setText(Building);
+        room.setText(Room);
+        date.setText(Date);
+        status.setText(Status);
+
+
+
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();

@@ -89,6 +89,48 @@
             android:inputType="textPhonetic"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
+        <EditText
+            android:id="@+id/course"
+            style="@style/modifiedEditText"
+            android:hint="Course"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <EditText
+            android:id="@+id/building"
+            style="@style/modifiedEditText"
+            android:hint="Building"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <EditText
+            android:id="@+id/room"
+            style="@style/modifiedEditText"
+            android:hint="Room"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <EditText
+            android:id="@+id/date"
+            style="@style/modifiedEditText"
+            android:hint="Date"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <EditText
+            android:id="@+id/time"
+            style="@style/modifiedEditText"
+            android:hint="Time"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <EditText
+            android:id="@+id/status"
+            style="@style/modifiedEditText"
+            android:hint="Covid Status"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <EditText
+            android:id="@+id/timestamp"
+            style="@style/modifiedEditText"
+            android:hint="Covid Status"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputTemp"
             style="@style/parent"

@@ -68,11 +68,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         final String phnnumber= mobile.getText().toString();
         final String pass_word= password.getText().toString();
         final String strcourse=spinner.getSelectedItem().toString();
+        final  String user_type="0";
         if(TextUtils.isEmpty(fname)||TextUtils.isEmpty(emailaddress)||TextUtils.isEmpty(phnnumber)||TextUtils.isEmpty(pass_word)){
           Toast.makeText(RegisterActivity.this,"ALL FIELDS ARE REQUIRED",Toast.LENGTH_SHORT).show();
         }
         else {
-          register(fname,emailaddress,strcourse,phnnumber,pass_word);
+          register(fname,emailaddress,strcourse,phnnumber,pass_word,user_type);
         }
       }
     });
@@ -96,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
   }
 
-  private void register(String fname, String emailaddress, String strcourse, String phnnumber, String pass_word) {
+  private void register(String fname, String emailaddress, String strcourse, String phnnumber, String pass_word,String user_type) {
     progressBar.setVisibility(View.VISIBLE);
     firebaseAuth.createUserWithEmailAndPassword(emailaddress,pass_word).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
       @Override
@@ -111,6 +112,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
           hashMap.put("course",strcourse);
           hashMap.put("email",emailaddress);
           hashMap.put("phonenumber",phnnumber);
+          hashMap.put("usertype", user_type);
           hashMap.put("imgUrl","default");
           databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
