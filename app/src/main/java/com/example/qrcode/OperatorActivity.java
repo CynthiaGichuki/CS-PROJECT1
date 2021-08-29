@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 public class OperatorActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView name,email,mobile;
+    private TextView name,email,mobile,course,building,room,timein,datein,status,timestamp;
     private Button scanbtn,confirmbtn;
     private IntentIntegrator qrScan;
     private ProgressBar progressBar;
@@ -62,16 +62,23 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
         name=findViewById(R.id.TextViewTextName);
         email=findViewById(R.id.TextViewEmail);
         mobile=findViewById(R.id.TextViewMobile);
+        course=findViewById(R.id.TextViewCourse);
+        room=findViewById(R.id.TextViewRoom);
+        timein=findViewById(R.id.TextViewTime);
+        datein=findViewById(R.id.TextViewDate);
+        status=findViewById(R.id.TextViewStatus);
+        timestamp=findViewById(R.id.TextViewtimestamp);
+        building=findViewById(R.id.TextViewBuilding);
         scanbtn=findViewById(R.id.cirScan);
 
-        confirmbtn=findViewById(R.id.cirConfirm);
+        confirmbtn=findViewById(R.id.cirConfirmd);
 
 
         qrScan = new IntentIntegrator(this);
 
         //attaching onclick listener
         scanbtn.setOnClickListener(this);
-        confirmbtn.setOnClickListener(this);
+     //   confirmbtn.setOnClickListener(this);
 
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -83,7 +90,7 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
             } else {
                 //if qr contains data
 scanbtn.setVisibility(View.VISIBLE);
-confirmbtn.setVisibility(View.VISIBLE);
+//confirmbtn.setVisibility(View.INVISIBLE);
 //String fname=name.getText().toString();
 //                String Mobile=mobile.getText().toString();
 //                String Email=email.getText().toString();
@@ -96,17 +103,25 @@ confirmbtn.setVisibility(View.VISIBLE);
                     name.setText(obj.getString("Name"));
                     email.setText(obj.getString("Email"));
                     mobile.setText(obj.getString("Mobile"));
+                    course.setText(obj.getString("Course"));
+                    timein.setText(obj.getString("Time"));
+                    datein.setText(obj.getString("Date"));
+                    status.setText(obj.getString("Status"));
+                    timestamp.setText(obj.getString("Timestamp"));
+                    building.setText(obj.getString("Building"));
+                    room.setText(obj.getString("Room"));
 
 
 
                     String fname=obj.get("Name").toString();
                     String Email=obj.get("Email").toString();
                     String Mobile=obj.get("Mobile").toString();
-String Course=obj.get("Course").toString();
-String Status=obj.get("Building").toString();
-String Room=obj.get("Room").toString();
-String Date=obj.get("Date").toString();
-String Time=obj.get("Time").toString();
+                   String Course=obj.get("Course").toString();
+                   String Status=obj.get("Status").toString();
+                   String Building=obj.get("Building").toString();
+                   String Room=obj.get("Room").toString();
+                  String Date=obj.get("Date").toString();
+                     String Time=obj.get("Time").toString();
                     String Timestamp=obj.get("Timestamp").toString();
 
 
@@ -116,6 +131,7 @@ String Time=obj.get("Time").toString();
                     intent.putExtra("mobile",Mobile);
                     intent.putExtra("course",Course);
                     intent.putExtra("status",Status);
+                    intent.putExtra("building",Building);
                     intent.putExtra("room",Room);
                     intent.putExtra("date",Date);
                     intent.putExtra("time",Time);
@@ -201,7 +217,7 @@ databaseReference=FirebaseDatabase.getInstance().getReference().child("confrim")
                 // Test code: text.setText("Button 1");
                 qrScan.initiateScan();
                 break;
-            case R.id.cirConfirm:
+            case R.id.cirConfirmd:
                 // Test code: text.setText("Button 2");
                 check();
                 break;

@@ -89,10 +89,22 @@
             android:inputType="textPhonetic"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/tvcourse"
+            style="@style/modifiedEditText"
+            android:hint="Course"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
         <EditText
             android:id="@+id/course"
             style="@style/modifiedEditText"
             android:hint="Course"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <TextView
+            android:id="@+id/tvbuilding"
+            style="@style/modifiedEditText"
+            android:hint="Building"
             android:inputType="numberDecimal"
             android:maxLines="1" />
         <EditText
@@ -101,10 +113,22 @@
             android:hint="Building"
             android:inputType="numberDecimal"
             android:maxLines="1" />
+        <TextView
+            android:id="@+id/tvRoom"
+            style="@style/modifiedEditText"
+            android:hint="Room"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
         <EditText
             android:id="@+id/room"
             style="@style/modifiedEditText"
             android:hint="Room"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <TextView
+            android:id="@+id/tvdate"
+            style="@style/modifiedEditText"
+            android:hint="Date"
             android:inputType="numberDecimal"
             android:maxLines="1" />
         <EditText
@@ -113,16 +137,34 @@
             android:hint="Date"
             android:inputType="numberDecimal"
             android:maxLines="1" />
+        <TextView
+            android:id="@+id/tvtimein"
+            style="@style/modifiedEditText"
+            android:hint="Class Time"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
         <EditText
             android:id="@+id/time"
             style="@style/modifiedEditText"
             android:hint="Time"
             android:inputType="numberDecimal"
             android:maxLines="1" />
+        <TextView
+            android:id="@+id/tvstatus"
+            style="@style/modifiedEditText"
+            android:hint="Is the user positive ?"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
         <EditText
             android:id="@+id/status"
             style="@style/modifiedEditText"
             android:hint="Covid Status"
+            android:inputType="numberDecimal"
+            android:maxLines="1" />
+        <TextView
+            android:id="@+id/tvtimestamp"
+            style="@style/modifiedEditText"
+            android:hint="QrCode Generated at what time?"
             android:inputType="numberDecimal"
             android:maxLines="1" />
         <EditText
@@ -136,8 +178,8 @@
             style="@style/parent"
             android:layout_marginTop="@dimen/loginViewsMargin">
 
-            <EditText
-                android:id="@+id/editTextTemp"
+            <Spinner
+                android:id="@+id/SpinnerTemp"
                 style="@style/modifiedEditText"
                 android:hint="temperature"
                 android:inputType="numberDecimal"
@@ -163,6 +205,14 @@
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:text="Confirm details"
            />
+        <Button
+            android:id="@+id/cirScan"
+            style="@style/loginButton"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="Scan details"
+            />
 
     </LinearLayout>
     </androidx.cardview.widget.CardView>

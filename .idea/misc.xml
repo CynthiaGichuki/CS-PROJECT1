@@ -3,14 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_confirm.xml" value="0.1" />
+        <entry key="..\:/Users/Jane/StudioProjects/QR-Code/app/src/main/res/layout/activity_confirm.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jane/StudioProjects/QR-Code/app/src/main/res/layout/activity_landing.xml" value="0.1634963768115942" />
+        <entry key="..\:/Users/Jane/StudioProjects/QR-Code/app/src/main/res/layout/activity_operator.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_edit_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_main.xml" value="0.1453804347826087" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_operator.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_qrcode_generate.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Lenovo/AndroidStudioProjects/QR-Code/app/src/main/res/layout/activity_start2.xml" value="0.1" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_edit_profile.xml" value="0.10416666666666667" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_forget_password.xml" value="0.1286231884057971" />
-        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_landing.xml" value="0.10587639311043566" />
-        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_login.xml" value="0.10587639311043566" />
-        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_main.xml" value="0.12001811594202899" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_operator.xml" value="0.15443840579710144" />
-        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_qrcode_generate.xml" value="0.1" />
+        <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_qrcode_generate.xml" value="0.25" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_register.xml" value="0.10587639311043566" />
         <entry key="..\:/Users/Olyviah/AndroidStudioProjects/QRCode/app/src/main/res/layout/activity_start2.xml" value="0.10587639311043566" />
       </map>
