@@ -2,6 +2,7 @@ package com.example.qrcode;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageAnalysis;
@@ -19,6 +20,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Size;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -48,6 +51,8 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
     private Button scanbtn,confirmbtn;
     private IntentIntegrator qrScan;
     private ProgressBar progressBar;
+    FirebaseAuth firebaseAuth;
+    Toolbar toolbar;
     //firebase
 
     private FirebaseAuth mAuth;
@@ -59,6 +64,8 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_operator);
 
         //View objects
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         name=findViewById(R.id.TextViewTextName);
         email=findViewById(R.id.TextViewEmail);
         mobile=findViewById(R.id.TextViewMobile);
@@ -81,6 +88,25 @@ public class OperatorActivity extends AppCompatActivity implements View.OnClickL
      //   confirmbtn.setOnClickListener(this);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.operator_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id= item.getItemId();
+         if(id==R.id.logout){
+            firebaseAuth.signOut();
+            startActivity(new Intent(OperatorActivity.this,LoginActivity.class));
+            finish();
+
+        }
+        return true;
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {

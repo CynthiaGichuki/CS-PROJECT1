@@ -3,7 +3,9 @@ package com.example.qrcode;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,6 +31,11 @@ public class LoginActivity extends AppCompatActivity {
   private FirebaseAuth firebaseAuth;
   private Button loginbtn;
   private ProgressBar progressBar;
+  public static final String Email = "emailKey";
+  public static final String MyPREFERENCES = "MyPrefs" ;
+
+  SharedPreferences sharedpreferences;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -42,12 +49,18 @@ public class LoginActivity extends AppCompatActivity {
     password=findViewById(R.id.editTextPassword);
     forgetpassword = findViewById(R.id.forget);
     firebaseAuth = FirebaseAuth.getInstance();
+    sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
 
     loginbtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         String tex_email = email.getText().toString();
         String tex_password = password.getText().toString();
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(Email, tex_email);
+        editor.commit();
+
         if (TextUtils.isEmpty(tex_email) || TextUtils.isEmpty(tex_password)){
           Toast.makeText(LoginActivity.this, "All Fields Required", Toast.LENGTH_SHORT).show();
         }
@@ -80,6 +93,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
               String usertype=snapshot.getValue(String.class);
               if(usertype.equals("0")){
+
+
                 Intent intent=new Intent(LoginActivity.this,Start2Activity.class);
                 startActivity(intent);
                 Toast.makeText(LoginActivity.this,"welcome",Toast.LENGTH_SHORT).show();

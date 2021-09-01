@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,7 +52,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Start2Activity extends AppCompatActivity {
     private TextView username;
-    private Button GenerateQrCode;
+    private ImageButton GenerateQrCode;
     private CircleImageView circleImageView;
     private FirebaseUser firebaseUser;
     private FirebaseAuth firebaseAuth;
@@ -123,7 +124,7 @@ circleImageView.setOnClickListener((v) -> {
 GenerateQrCode.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent intent=new Intent(Start2Activity.this,QRCodeGenerate.class);
+        Intent intent=new Intent(Start2Activity.this,MainActivity.class);
         startActivity(intent);
 
     }

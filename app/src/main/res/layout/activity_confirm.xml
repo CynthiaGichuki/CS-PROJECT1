@@ -205,15 +205,6 @@
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:text="Confirm details"
            />
-        <Button
-            android:id="@+id/cirScan"
-            style="@style/loginButton"
-            android:textAlignment="center"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/loginViewsMargin"
-            android:text="Scan details"
-            />
-
     </LinearLayout>
     </androidx.cardview.widget.CardView>
     </LinearLayout>
