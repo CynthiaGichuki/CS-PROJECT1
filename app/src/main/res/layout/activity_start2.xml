@@ -19,12 +19,36 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/screening_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Screening Details:"
+        android:textSize="30sp"
+        android:layout_marginStart="20dp"
+        android:textStyle="bold">
+
+    </TextView>
+    <TextView
+        android:id="@+id/press_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Press Image Below"
+        android:textSize="20sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:textStyle="italic">
+
+    </TextView>
     <ImageButton
         android:id="@+id/idBtnGenerateQR"
         android:layout_width="wrap_content"
         android:layout_height="300dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/screening"
         android:text="Screening details" >
@@ -32,14 +56,7 @@
 
     </ImageButton>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Screening Details-Press Hear"
-        android:textSize="18sp">
 
-    </TextView>
 
 </FrameLayout>
 

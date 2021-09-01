@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -64,9 +65,11 @@ public class QRCodeGenerate extends AppCompatActivity implements AdapterView.OnI
     TextInputLayout name,mobile,email;
     Button btGenerate;
     ImageView ivOutput;
+
     Spinner spinner1, spinner2;
     Button btnDatePicker, btnTimePicker;
     EditText txtDate, txtTime;
+
     private int mYear, mMonth, mDay, mHour, mMinute;
     List<String> subCategories = new ArrayList<>();
 String status;
@@ -89,6 +92,7 @@ String status;
         spinner1 = findViewById(R.id.building);
         spinner2 = findViewById(R.id.room);
         mStatus=findViewById(R.id.rg_status);
+
         mStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -192,8 +196,11 @@ String status;
         });
 
         btGenerate.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+
                 java.util.Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 final String saveCurrentDate = sdf.format(calendar.getTime());

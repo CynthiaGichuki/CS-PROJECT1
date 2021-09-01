@@ -54,7 +54,7 @@ String _fname,_email,_password;
         setContentView(R.layout.activity_edit_profile);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        String name=user.getUid();
+        String name=user.getDisplayName();
         TextView welcome=findViewById(R.id.editprofile);
         welcome.setText("Edit Profile:"+name);
         //hooks
