@@ -38,6 +38,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+    private EditText dryCough;
+    private EditText fever;
+    private EditText fatigue;
+    private EditText headache;
+    private EditText soreThroat;
+    private EditText taste;
+    private EditText aches;
+    private EditText contact;
     //gender radio button
     RadioButton mFeverOptions;
     RadioGroup mFever;
@@ -89,8 +97,7 @@ String strdrycough,strfever,strfatigue,strheadache,strsorethroat,strtaste,strach
         firebaseDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
-        databaseref=FirebaseDatabase.getInstance().getReference().child("screening");
-        mDatabaseUsers=FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+        databaseref=FirebaseDatabase.getInstance().getReference().child("screening").child(mCurrentUser.getUid());
         screening=new Screening();
 
      mDryCough.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -206,22 +213,6 @@ String strdrycough,strfever,strfatigue,strheadache,strsorethroat,strtaste,strach
 
             }
         });
-        mFatigue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                mFatigueOptions=mFatigue.findViewById(checkedId);
-                switch (checkedId){
-                    case R.id.rb_fatigue_yes:
-                        strfatigue=mFatigueOptions.getText().toString();
-                        break;
-                    case R.id.rb_fatigue_no:
-                        strfatigue=mFatigueOptions.getText().toString();
-                        break;
-                    default:
-                }
-
-            }
-        });
         mContact.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -262,14 +253,14 @@ Toast.makeText(MainActivity.this,"posting ....",Toast.LENGTH_LONG).show();
                 SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm");
 
                 final String saveCurrentTime = currentTime.format(calendar1.getTime());
-String userId=mCurrentUser.getUid();
+
 
                 if(TextUtils.isEmpty(drycough)||TextUtils.isEmpty(Fever)||TextUtils.isEmpty(Fatigue)||TextUtils.isEmpty(Headache)||TextUtils.isEmpty(Sorethroat)||TextUtils.isEmpty(Taste)||TextUtils.isEmpty(Aches)||TextUtils.isEmpty(Contact)){
 
                     Toast.makeText(MainActivity.this,"ALL FIELDS ARE REQUIRED",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    addtoDb(drycough,Fever,Fatigue,Headache,Sorethroat,Taste,Aches,Contact,saveCurrentDate,saveCurrentDate,userId);
+                    addtoDb(drycough,Fever,Fatigue,Headache,Sorethroat,Taste,Aches,Contact,saveCurrentDate,saveCurrentDate);
                 }
 
 
@@ -279,7 +270,7 @@ String userId=mCurrentUser.getUid();
         });
     }
 
-    private void addtoDb(String drycough, String fever, String fatigue, String headache, String sorethroat, String taste, String aches, String contact, String saveCurrentDate, String saveCurrentTime,String userId) {
+    private void addtoDb(String drycough, String fever, String fatigue, String headache, String sorethroat, String taste, String aches, String contact, String saveCurrentDate, String saveCurrentTime) {
         screening.setDrycough(drycough);
         screening.setFever(fever);
         screening.setFatigue(fatigue);
@@ -290,13 +281,11 @@ String userId=mCurrentUser.getUid();
         screening.setContact(contact);
         screening.setDate(saveCurrentDate);
         screening.setTime(saveCurrentTime);
-        screening.setUserid(userId);
-final DatabaseReference newpost=databaseref.push();
 
-mDatabaseUsers.addValueEventListener(new ValueEventListener() {
+databaseref.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot snapshot) {
-        newpost.setValue(screening);
+        databaseref.setValue(screening);
 
         Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
         Intent intent=new Intent(MainActivity.this,Start2Activity.class);
