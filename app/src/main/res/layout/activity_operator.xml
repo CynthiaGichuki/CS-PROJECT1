@@ -82,17 +82,50 @@
                 android:inputType="number"
                 android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textTemp"
-                style="@style/parent"
-                android:layout_marginTop="@dimen/loginViewsMargin">
-            <EditText
-                android:id="@+id/TextViewTemp"
+            <TextView
+                android:id="@+id/TextViewCourse"
                 style="@style/modifiedEditText"
-                android:hint="Temperature"
-                android:inputType="numberDecimal"
+                android:hint="course"
+                android:inputType="text"
                 android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/TextViewBuilding"
+                style="@style/modifiedEditText"
+                android:hint="building"
+                android:inputType="text"
+                android:maxLines="1" />
+            <TextView
+                android:id="@+id/TextViewRoom"
+                style="@style/modifiedEditText"
+                android:hint="room"
+                android:inputType="text"
+                android:maxLines="1" />
+            <TextView
+                android:id="@+id/TextViewDate"
+                style="@style/modifiedEditText"
+                android:hint="Date"
+                android:inputType="text"
+                android:maxLines="1" />
+            <TextView
+                android:id="@+id/TextViewTime"
+                style="@style/modifiedEditText"
+                android:hint="Time"
+                android:inputType="text"
+                android:maxLines="1" />
+            <TextView
+                android:id="@+id/TextViewStatus"
+                style="@style/modifiedEditText"
+                android:hint="course"
+                android:inputType="text"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/TextViewtimestamp"
+                style="@style/modifiedEditText"
+                android:hint="timestamp"
+                android:inputType="text"
+                android:maxLines="1" />
+
             <Button
                 android:id="@+id/cirScan"
                 style="@style/loginButton"
@@ -100,6 +133,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:text="Scan"/>
+
 
 
         </LinearLayout>

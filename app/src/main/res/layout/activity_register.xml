@@ -53,16 +53,27 @@
                         android:id="@+id/textInputName"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
+                        <EditText
+                            android:id="@+id/editTextName"
+                            style="@style/modifiedEditText"
+                            android:hint="Name"
+                            android:inputType="textPersonName"
+                            android:maxLines="1" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/textInputSpinner"
+    style="@style/parent"
+    android:layout_marginTop="@dimen/loginViewsMargin">
 
-                    <Spinner
-                        android:id="@+id/course"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+    <Spinner
+        android:id="@+id/course"
+        style="@style/modifiedEditText"
+        android:hint="Course"
+        android:inputType="textPersonName"
+        android:maxLines="1" />
+</com.google.android.material.textfield.TextInputLayout>
 
-                        />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputEmail"
@@ -107,12 +118,7 @@
 
                     </ProgressBar>
 
-                    <EditText
-                        android:id="@+id/editTextName"
-                        style="@style/modifiedEditText"
-                        android:hint="Name"
-                        android:inputType="textPersonName"
-                        android:maxLines="1" />
+
 
                     <Button
                         android:id="@+id/cirRegisterButton"
