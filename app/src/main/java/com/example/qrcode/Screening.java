@@ -12,21 +12,11 @@ public class Screening {
     private String Contact;
     private String Date;
     private String Time;
-    private String userId;
-
-
 
 
     public Screening() {
     }
 
-    public String getUserid() {
-        return userId;
-    }
-
-    public void setUserid(String userid) {
-        userId = userid;
-    }
 
     public String getDrycough() {
         return drycough;

@@ -4,32 +4,18 @@ public class UserData {
     private String userId;
     private String fullname;
     private String email;
-    private String course;
     private String phonenumber;
     private String imgUrl;
 
-
-    public UserData(String userId, String fullname, String email, String course, String phonenumber, String imgUrl ) {
+    public UserData(String userId, String fullname, String email, String phonenumber, String imgUrl) {
         this.userId = userId;
         this.fullname = fullname;
         this.email = email;
-        this.course = course;
         this.phonenumber = phonenumber;
         this.imgUrl = imgUrl;
-
     }
 
     public UserData() {
-    }
-
-
-
-    public String getCourse() {
-        return course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
     }
 
     public String getUserId() {

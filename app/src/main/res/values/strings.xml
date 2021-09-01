@@ -56,21 +56,6 @@
         <item>Communication</item>
         <item>Hospitality and Hotel Management</item>
     </string-array>
-    <string-array name="temp">
-        <item>33.0</item>
-        <item>33.5</item>
-        <item>34.0</item>
-        <item>34.5</item>
-        <item>35.0</item>
-        <item>35.6</item>
-        <item>36.4</item>
-        <item>36.9</item>
-        <item>37.0</item>
-        <item>37.4</item>
-v
-
-
-    </string-array>
 
 
 </resources>
