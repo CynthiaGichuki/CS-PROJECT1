@@ -299,7 +299,7 @@ mDatabaseUsers.addValueEventListener(new ValueEventListener() {
         newpost.setValue(screening);
 
         Toast.makeText(MainActivity.this, "data added", Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MainActivity.this,Start2Activity.class);
+        Intent intent=new Intent(MainActivity.this,QRCodeGenerate.class);
         startActivity(intent);
 
     }

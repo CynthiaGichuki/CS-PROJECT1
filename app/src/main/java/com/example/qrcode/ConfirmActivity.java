@@ -110,7 +110,7 @@ timestamp.setText(TimeStamp);
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         // below line is used to get reference for our database.
-        databaseReference = firebaseDatabase.getReference("scanning").child(String.valueOf(maxid+1));
+        databaseReference = firebaseDatabase.getReference("scanning");
 
         // initializing our object
         // class variable.
@@ -185,13 +185,14 @@ timestamp.setText(TimeStamp);
         operatordetails.setDate(saveCurrentDate);
         operatordetails.setTime(saveCurrentTime);
         //String dateid=operatordetails.getDate();
+        final DatabaseReference newpost=databaseReference.push();
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                maxid=(snapshot.getChildrenCount());
-                //databaseReference.child(String.valueOf(maxid+1)).setValue(operatordetails);
-                databaseReference.setValue(operatordetails);
+//
+                newpost.setValue(operatordetails);
+                //databaseReference.setValue(operatordetails);
                // Toast.mak eText(ConfirmActivity.this, "data added", Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(ConfirmActivity.this,OperatorActivity.class);
                 Toast.makeText(ConfirmActivity.this,"User has been confirmed",Toast.LENGTH_SHORT).show();
